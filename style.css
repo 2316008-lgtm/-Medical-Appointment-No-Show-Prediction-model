@@ -1,0 +1,475 @@
+/*
+ * Medical Appointment No-Show Prediction - Styling System
+ * Project: 31. ABISHEK M
+ * Modern Dark-Mode Glassmorphism Design System
+ */
+
+:root {
+    --bg-main: #0B0F19;
+    --bg-card: rgba(17, 24, 39, 0.75);
+    --bg-card-hover: rgba(31, 41, 55, 0.85);
+    --border-color: rgba(75, 85, 99, 0.4);
+    --border-glow: rgba(59, 130, 246, 0.5);
+    
+    --primary: #3B82F6;
+    --primary-light: #60A5FA;
+    --primary-dark: #1D4ED8;
+    --accent-cyan: #06B6D4;
+    
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --text-dim: #6B7280;
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px 20px;
+}
+
+/* Header Component */
+.header-hero {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+    border: 1px solid rgba(75, 85, 99, 0.35);
+    border-radius: var(--radius-lg);
+    padding: 28px 36px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    backdrop-filter: blur(12px);
+}
+
+.badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--primary-light);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.header-hero h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(to right, #FFFFFF, #CBD5E1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 8px 0 6px 0;
+}
+
+.header-hero p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    max-width: 760px;
+}
+
+.candidate-box {
+    text-align: right;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+}
+
+.candidate-name {
+    font-weight: 700;
+    color: #F8FAFC;
+    font-size: 1.05rem;
+}
+
+.candidate-sub {
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+/* Nav Tabs */
+.nav-tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    position: relative;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-btn.active {
+    color: var(--primary-light);
+    background: rgba(59, 130, 246, 0.12);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 0 12px var(--primary);
+}
+
+/* Tab Content Areas */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Components */
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(8px);
+    transition: var(--transition);
+}
+
+.glass-card:hover {
+    border-color: rgba(147, 197, 253, 0.3);
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Grid Layouts */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.grid-predictor {
+    display: grid;
+    grid-template-columns: 1.15fr 1.15fr 1.3fr;
+    gap: 22px;
+}
+
+/* Form Inputs */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    color: #F8FAFC;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.range-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.range-wrap input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary);
+}
+
+.range-val {
+    font-weight: 700;
+    color: var(--primary-light);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Checkbox and Radios */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #CBD5E1;
+}
+
+.checkbox-item input[type="checkbox"],
+.checkbox-item input[type="radio"] {
+    accent-color: var(--primary);
+    width: 17px;
+    height: 17px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
+}
+
+/* Results Box */
+.risk-meter-box {
+    background: rgba(15, 23, 42, 0.9);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.risk-score-display {
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 10px 0;
+    color: #F8FAFC;
+}
+
+.risk-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+.driver-list, .rec-list {
+    list-style: none;
+    padding: 0;
+}
+
+.driver-list li, .rec-list li {
+    padding: 8px 12px;
+    background: rgba(30, 41, 59, 0.5);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 8px;
+    font-size: 0.88rem;
+    color: #E2E8F0;
+}
+
+/* Metric Cards */
+.kpi-card {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    transition: var(--transition);
+}
+
+.kpi-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.kpi-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kpi-val {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #F8FAFC;
+    margin: 6px 0 2px 0;
+}
+
+.kpi-sub {
+    font-size: 0.82rem;
+    color: var(--success);
+    font-weight: 600;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+.custom-table th {
+    background: rgba(15, 23, 42, 0.9);
+    color: #94A3B8;
+    padding: 12px 14px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.custom-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+    color: #E2E8F0;
+}
+
+.custom-table tr:hover td {
+    background: rgba(59, 130, 246, 0.06);
+}
+
+/* SVG Chart Elements */
+.chart-container {
+    width: 100%;
+    height: 340px;
+    position: relative;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+    .grid-predictor, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .header-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .candidate-box {
+        text-align: left;
+        width: 100%;
+    }
+}
