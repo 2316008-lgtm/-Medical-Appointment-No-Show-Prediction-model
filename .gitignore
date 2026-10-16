@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large intermediate raw datasets (sample and processed models are tracked)
+data/medical_noshows.csv
+data/cleaned_appointments.csv
+
+# Keep sample data for demo and triage
+!data/sample_schedule_for_prediction.csv
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Appointment No-Show Prediction | 31. ABISHEK M</title>
+    <meta name="description" content="AI-powered medical appointment attendance prediction and clinical scheduling optimization system by 31. ABISHEK M. Real-time patient risk triage, benchmarking Logistic Regression, Decision Tree, Random Forest, and XGBoost.">
+    <meta name="keywords" content="Medical No-Show, Machine Learning, Healthcare Administration, XGBoost, Random Forest, Logistic Regression, Patient Scheduling">
+    <meta name="author" content="31. ABISHEK M">
+
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER HERO -->
+        <header class="header-hero">
+            <div>
+                <span class="badge-tag">🏥 Healthcare Administration & Patient Scheduling</span>
+                <h1>Medical Appointment No-Show Prediction</h1>
+                <p>Machine Learning Decision Support System to reduce clinic idle capacity, prevent care delays, and triage patient reminders with zero data leakage.</p>
+            </div>
+            <div class="candidate-box">
+                <div class="candidate-name">31. ABISHEK M</div>
+                <div class="candidate-sub">ML Engineering • Client-Side Live Model</div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="nav-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="tab-predictor" id="btn-tab-predictor">
+                <span>🩺</span> Patient Risk Predictor
+            </button>
+            <button class="tab-btn" data-tab="tab-benchmark" id="btn-tab-benchmark">
+                <span>📊</span> Model Benchmarking
+            </button>
+            <button class="tab-btn" data-tab="tab-batch" id="btn-tab-batch">
+                <span>📅</span> Batch Scheduling Triage
+            </button>
+            <button class="tab-btn" data-tab="tab-insights" id="btn-tab-insights">
+                <span>📈</span> Healthcare Data Insights
+            </button>
+            <button class="tab-btn" data-tab="tab-features" id="btn-tab-features">
+                <span>🧠</span> Feature Importance & Rules
+            </button>
+        </nav>
+
+        <!-- TAB 1: REAL-TIME PATIENT PREDICTOR -->
+        <main id="tab-predictor" class="tab-content active">
+            <div class="grid-predictor">
+                
+                <!-- Col 1: Demographic & Clinical -->
+                <div class="glass-card">
+                    <h2 class="card-title">1. Patient Profile</h2>
+                    
+                    <div class="form-group">
+                        <label for="input-age">Patient Age (Years)</label>
+                        <div class="range-wrap">
+                            <input type="range" id="input-age" min="0" max="100" value="38">
+                            <span class="range-val" id="val-age">38</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-gender">Recorded Gender</label>
+                        <select id="input-gender" class="form-control">
+                            <option value="F">Female (F)</option>
+                            <option value="M">Male (M)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Socioeconomic & Welfare Assistance</label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input-scholarship">
+                            <span>Bolsa Família Assistance (Scholarship)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chronic Medical Conditions</label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input-hypertension">
+                            <span>Hypertension (High Blood Pressure)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input-diabetes">
+                            <span>Diabetes Mellitus</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input-alcoholism">
+                            <span>Alcoholism Indicator</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input-handicap">
+                            <span>Physical Disability / Handicap</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Col 2: Booking Logistics & History -->
+                <div class="glass-card">
+                    <h2 class="card-title">2. Scheduling Logistics</h2>
+                    
+                    <div class="form-group">
+                        <label for="input-lead-days">Booking Lead Time (Waiting Days)</label>
+                        <div class="range-wrap">
+                            <input type="range" id="input-lead-days" min="0" max="60" value="7">
+                            <span class="range-val" id="val-lead-days">7d</span>
+                        </div>
+                        <small style="color: var(--text-dim); font-size: 0.78rem;">0 days = Same-Day acute booking</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-weekday">Appointment Day of Week</label>
+                        <select id="input-weekday" class="form-control">
+                            <option value="0">Monday</option>
+                            <option value="1">Tuesday</option>
+                            <option value="2" selected>Wednesday</option>
+                            <option value="3">Thursday</option>
+                            <option value="4">Friday</option>
+                            <option value="5">Saturday</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-sms">Automated SMS Reminder Status</label>
+                        <select id="input-sms" class="form-control">
+                            <option value="1" selected>Yes — SMS Notification Sent/Received</option>
+                            <option value="0">No — No SMS Sent</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prior Patient Visit History (Leak-Free)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label for="input-prev-appts" style="font-size: 0.8rem;">Prior Visits</label>
+                                <input type="number" id="input-prev-appts" class="form-control" min="0" max="30" value="3">
+                            </div>
+                            <div>
+                                <label for="input-prev-noshows" style="font-size: 0.8rem;">Prior No-Shows</label>
+                                <input type="number" id="input-prev-noshows" class="form-control" min="0" max="30" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-model">Active Algorithm</label>
+                        <select id="input-model" class="form-control">
+                            <option value="XGBoost" selected>XGBoost (Gradient Boosted Trees - Champion)</option>
+                            <option value="Random Forest">Random Forest (Bagging Ensemble)</option>
+                            <option value="Decision Tree">Decision Tree Classifier</option>
+                            <option value="Logistic Regression">Logistic Regression (L2 Balanced)</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-predict" class="btn-primary">
+                        <span>⚡</span> Calculate Attendance Risk
+                    </button>
+                </div>
+
+                <!-- Col 3: Prediction & Clinical Action Plan -->
+                <div class="glass-card">
+                    <h2 class="card-title">3. Clinical Action Plan</h2>
+                    
+                    <div id="risk-box" class="risk-meter-box">
+                        <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700;">
+                            Estimated No-Show Probability
+                        </div>
+                        <div id="risk-score" class="risk-score-display">24.5%</div>
+                        <div id="risk-badge" class="risk-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);">
+                            Low Risk
+                        </div>
+                        <div id="prediction-verdict" style="font-size: 0.95rem; font-weight: 600; color: #CBD5E1;">
+                            Will Attend Appointment
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <h3 style="font-size: 0.95rem; color: #F8FAFC; margin-bottom: 8px;">🔍 Primary Risk Drivers</h3>
+                        <ul id="driver-list" class="driver-list">
+                            <li>Standard patient profile with low waiting duration.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 16px;">
+                        <h3 style="font-size: 0.95rem; color: #F8FAFC; margin-bottom: 8px;">📋 Recommended Clinic Protocol</h3>
+                        <ul id="rec-list" class="rec-list">
+                            <li>Automated SMS notification dispatched 24 hours prior.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- TAB 2: MODEL BENCHMARKING -->
+        <section id="tab-benchmark" class="tab-content">
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <h2 class="card-title">🏆 Model Benchmark Scorecard (Hold-Out Test: 22,104 Appointments)</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+                    All four required models were trained on 88,412 records and validated on 22,104 hold-out test samples (stratified 20.19% no-show prevalence).
+                </p>
+
+                <!-- KPI Metric Cards -->
+                <div class="grid-4" style="margin-bottom: 24px;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Logistic Regression</div>
+                        <div class="kpi-val" style="color: #60A5FA;">0.7305</div>
+                        <div class="kpi-sub">Recall: 84.85% (High Sensitivity)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Decision Tree</div>
+                        <div class="kpi-val" style="color: #A78BFA;">0.7331</div>
+                        <div class="kpi-sub">Recall: 82.05% | Depth: 7</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Random Forest</div>
+                        <div class="kpi-val" style="color: #F472B6;">0.7433</div>
+                        <div class="kpi-sub">Recall: 82.03% | 150 Trees</div>
+                    </div>
+                    <div class="kpi-card" style="border-color: var(--primary);">
+                        <div class="kpi-label" style="color: var(--accent-cyan);">★ XGBoost (Champion)</div>
+                        <div class="kpi-val" style="color: var(--accent-cyan);">0.7454</div>
+                        <div class="kpi-sub" style="color: #38BDF8;">PR-AUC: 0.4079 | AUC: 0.7454</div>
+                    </div>
+                </div>
+
+                <!-- Metrics Table -->
+                <div class="table-responsive">
+                    <table class="custom-table" id="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Accuracy</th>
+                                <th>Recall (Sensitivity)</th>
+                                <th>Precision (PPV)</th>
+                                <th>Specificity (TNR)</th>
+                                <th>F1-Score</th>
+                                <th>ROC-AUC</th>
+                                <th>PR-AUC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3 class="card-title">📈 Receiver Operating Characteristic (ROC) Curves</h3>
+                    <div class="chart-container">
+                        <canvas id="canvas-roc" width="560" height="300"></canvas>
+                    </div>
+                    <div style="display: flex; gap: 14px; justify-content: center; margin-top: 10px; font-size: 0.8rem;">
+                        <span style="color: #06B6D4;">■ XGBoost (0.745)</span>
+                        <span style="color: #EC4899;">■ Random Forest (0.743)</span>
+                        <span style="color: #8B5CF6;">■ Decision Tree (0.733)</span>
+                        <span style="color: #3B82F6;">■ Logistic Reg (0.731)</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 class="card-title">🎯 Precision-Recall (PR) Curves</h3>
+                    <div class="chart-container">
+                        <canvas id="canvas-pr" width="560" height="300"></canvas>
+                    </div>
+                    <div style="display: flex; gap: 14px; justify-content: center; margin-top: 10px; font-size: 0.8rem;">
+                        <span style="color: #06B6D4;">■ XGBoost (0.408)</span>
+                        <span style="color: #EC4899;">■ Random Forest (0.405)</span>
+                        <span style="color: #64748B;">-- Baseline (0.202)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: BATCH SCHEDULING TRIAGE -->
+        <section id="tab-batch" class="tab-content">
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                    <div>
+                        <h2 class="card-title" style="margin-bottom: 4px;">📅 Upcoming Clinic Schedule Risk Triage</h2>
+                        <p style="color: var(--text-muted); font-size: 0.88rem;">Prioritized patient roster evaluated client-side for targeted clinical phone outreach.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="btn-export-csv" class="btn-primary" style="width: auto; padding: 10px 18px;">
+                            <span>📥</span> Download Outreach CSV
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid-4" style="margin-bottom: 20px;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Appointments</div>
+                        <div class="kpi-val" id="batch-total">35</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label" style="color: var(--danger);">🚨 High Risk (Urgent Calls)</div>
+                        <div class="kpi-val" id="batch-high" style="color: var(--danger);">12</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label" style="color: var(--warning);">📱 Moderate Risk (SMS)</div>
+                        <div class="kpi-val" id="batch-mod" style="color: var(--warning);">15</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label" style="color: var(--success);">✅ Low Risk (Routine)</div>
+                        <div class="kpi-val" id="batch-low" style="color: var(--success);">8</div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table" id="batch-table">
+                        <thead>
+                            <tr>
+                                <th>Appointment ID</th>
+                                <th>Age / Gender</th>
+                                <th>Lead Time</th>
+                                <th>SMS Sent</th>
+                                <th>Prior No-Shows</th>
+                                <th>Risk Probability</th>
+                                <th>Triage Tier</th>
+                                <th>Recommended Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-tbody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: HEALTHCARE DATA INSIGHTS -->
+        <section id="tab-insights" class="tab-content">
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3 class="card-title">⏳ Booking Lead Time vs No-Show Propensity</h3>
+                    <div class="chart-container">
+                        <canvas id="canvas-lead-trend" width="560" height="300"></canvas>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                        💡 <strong>Finding:</strong> Same-day bookings have a <strong>4.6%</strong> no-show rate. When lead time exceeds 14 days, no-show rate jumps past <strong>32%</strong>.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3 class="card-title">👥 Patient Age Cohort Attendance Compliance</h3>
+                    <div class="chart-container">
+                        <canvas id="canvas-age-trend" width="560" height="300"></canvas>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                        💡 <strong>Finding:</strong> Young adults (ages 15-25) exhibit highest volatility (~26% no-shows); seniors (>60) have the highest adherence (~14%).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: FEATURE IMPORTANCE -->
+        <section id="tab-features" class="tab-content">
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3 class="card-title">🌲 Predictive Drivers: XGBoost & Random Forest</h3>
+                    <div class="chart-container">
+                        <canvas id="canvas-features" width="560" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 class="card-title">🔬 Operational Healthcare Strategy</h3>
+                    <div style="font-size: 0.9rem; color: #CBD5E1; line-height: 1.7;">
+                        <p style="margin-bottom: 12px;">
+                            <strong>1. Protect Same-Day Slots:</strong><br>
+                            Same-day bookings have the highest attendance rate in outpatient medicine (over 95%). Clinics should preserve ~15-20% capacity for same-day walk-in or acute slots.
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong>2. Targeted Multi-Touch Reminders:</strong><br>
+                            Rather than sending generic reminders, patients with $\text{LeadDays} \ge 7$ and prior no-show flags receive targeted confirmation calls 48 hours prior with self-service 1-click reschedule links.
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong>3. Overbooking & Waitlist Safeguards:</strong><br>
+                            High-risk slots are flagged for controlled overbooking or rapid standby queues to protect physician billable hours without adding patient wait time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="margin-top: 40px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <strong>31. ABISHEK M — Medical Appointment No-Show Prediction</strong><br>
+            Machine Learning System deployed for GitHub Pages • 100% Client-Side Inference in JavaScript
+        </footer>
+
+    </div>
+
+    <!-- Scripts: Pure Vanilla JavaScript (Client-side execution for GitHub Pages) -->
+    <script src="model_data.js"></script>
+    <script src="models_engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
